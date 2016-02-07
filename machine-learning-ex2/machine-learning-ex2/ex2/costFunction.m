@@ -19,7 +19,7 @@ hypo = sigmoid(X*weights);
 
 J = (1/data_size)*sum(-y.*log(hypo) - (1 - y).*log(1-hypo));
 
-grad = (1/data_size)*sum((hypo - y).*X);
+grad = transpose((1/data_size)*sum((hypo - y).*X));
 
 % =============================================================
 
