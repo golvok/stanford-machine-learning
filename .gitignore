@@ -1,5 +1,9 @@
 originals/**
 */machine-learning-ex*/ex*/lib
 */machine-learning-ex*/ex*/token
-*/machine-learning-ex*/ex*/submit
-*/machine-learning-ex*/ex*/ex*.pdf
+**/ex*.pdf
+**/submit.m
+**/token.mat
+**/out.txt
+**/lib/*
+**/%
