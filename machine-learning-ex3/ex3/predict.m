@@ -10,6 +10,9 @@ num_labels = size(Weights2, 1);
 % You need to return the following variables correctly 
 predictions = zeros(size(X, 1), 1);
 
+% Add ones to the X data matrix
+X = [ones(data_size, 1) X];
+
 % ====================== YOUR CODE HERE ======================
 % Instructions: Complete the following code to make predictions using
 %               your learned neural network. You should set prediction to a
@@ -21,7 +24,12 @@ predictions = zeros(size(X, 1), 1);
 %       can use max(A, [], 2) to obtain the max for each row.
 %
 
-
+inputs_l2 = X*transpose(Weights1);
+output_l2 = [ ones(data_size,1), sigmoid(inputs_l2) ];
+inputs_l3 = output_l2*transpose(Weights2);
+output_l3 = sigmoid(inputs_l3);
+[ dummy, predictions ] = max(output_l3, [], 2);
+clear dummy;
 
 % =========================================================================
 
