@@ -31,6 +31,8 @@ X = [ones(data_size, 1) X];
 %       
 
 
+[dummy, predictions] = max(sigmoid(X*transpose(all_weights)), [], 2);
+clear dummy;
 
 % =========================================================================
 
