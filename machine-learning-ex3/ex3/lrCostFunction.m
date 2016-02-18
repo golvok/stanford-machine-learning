@@ -9,8 +9,8 @@ data_size = length(y);
 
 hypo = sigmoid(X*weights);
 
-cost = (1/data_size)*sum(-y.*log(hypo) - (1 - y).*log(1-hypo)) + reg_importance/(2*data_size)*sum(weights([2:size(weights)]).^2);
+cost = (1/data_size)*sum(-y.*log(hypo) - (1 - y).*log(1-hypo)) + reg_importance/(2*data_size)*sum(weights([2:length(weights)]).^2);
 
-grad = transpose((1/data_size)*sum((hypo - y).*X)) + [ 0; reg_importance/data_size*weights([2:size(weights)]) ];
+grad = transpose((1/data_size)*sum((hypo - y).*X)) + [ 0; reg_importance/data_size*weights([2:length(weights)]) ];
 
 end
