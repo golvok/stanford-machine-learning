@@ -2,11 +2,11 @@ function [J grad] = nnCostFunction(nn_params, ...
                                    input_layer_size, ...
                                    hidden_layer_size, ...
                                    num_labels, ...
-                                   X, y, lambda)
+                                   X, y, reg_importance)
 %NNCOSTFUNCTION Implements the neural network cost function for a two layer
 %neural network which performs classification
 %   [J grad] = NNCOSTFUNCTON(nn_params, hidden_layer_size, num_labels, ...
-%   X, y, lambda) computes the cost and gradient of the neural network. The
+%   X, y, reg_importance) computes the cost and gradient of the neural network. The
 %   parameters for the neural network are "unrolled" into the vector
 %   nn_params and need to be converted back into the weight matrices. 
 % 
@@ -14,21 +14,21 @@ function [J grad] = nnCostFunction(nn_params, ...
 %   partial derivatives of the neural network.
 %
 
-% Reshape nn_params back into the parameters Theta1 and Theta2, the weight matrices
+% Reshape nn_params back into the parameters Weights1 and Weights2, the weight matrices
 % for our 2 layer neural network
-Theta1 = reshape(nn_params(1:hidden_layer_size * (input_layer_size + 1)), ...
+Weights1 = reshape(nn_params(1:hidden_layer_size * (input_layer_size + 1)), ...
                  hidden_layer_size, (input_layer_size + 1));
 
-Theta2 = reshape(nn_params((1 + (hidden_layer_size * (input_layer_size + 1))):end), ...
+Weights2 = reshape(nn_params((1 + (hidden_layer_size * (input_layer_size + 1))):end), ...
                  num_labels, (hidden_layer_size + 1));
 
 % Setup some useful variables
-m = size(X, 1);
+data_size = size(X, 1);
          
 % You need to return the following variables correctly 
 J = 0;
-Theta1_grad = zeros(size(Theta1));
-Theta2_grad = zeros(size(Theta2));
+Weights1_grad = zeros(size(Weights1));
+Weights2_grad = zeros(size(Weights2));
 
 % ====================== YOUR CODE HERE ======================
 % Instructions: You should complete the code by working through the
@@ -40,9 +40,9 @@ Theta2_grad = zeros(size(Theta2));
 %         computed in ex4.m
 %
 % Part 2: Implement the backpropagation algorithm to compute the gradients
-%         Theta1_grad and Theta2_grad. You should return the partial derivatives of
-%         the cost function with respect to Theta1 and Theta2 in Theta1_grad and
-%         Theta2_grad, respectively. After implementing Part 2, you can check
+%         Weights1_grad and Weights2_grad. You should return the partial derivatives of
+%         the cost function with respect to Weights1 and Weights2 in Weights1_grad and
+%         Weights2_grad, respectively. After implementing Part 2, you can check
 %         that your implementation is correct by running checkNNGradients
 %
 %         Note: The vector y passed into the function is a vector of labels
@@ -58,34 +58,15 @@ Theta2_grad = zeros(size(Theta2));
 %
 %         Hint: You can implement this around the code for
 %               backpropagation. That is, you can compute the gradients for
-%               the regularization separately and then add them to Theta1_grad
-%               and Theta2_grad from Part 2.
+%               the regularization separately and then add them to Weights1_grad
+%               and Weights2_grad from Part 2.
 %
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 % -------------------------------------------------------------
 
 % =========================================================================
 
 % Unroll gradients
-grad = [Theta1_grad(:) ; Theta2_grad(:)];
+grad = [Weights1_grad(:) ; Weights2_grad(:)];
 
 
 end
