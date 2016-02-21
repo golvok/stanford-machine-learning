@@ -78,37 +78,16 @@ for i = 1:data_size
 	J += sum(-onehot_y.*log(transpose(output(i,:)))-(1-onehot_y).*log(1-transpose(output(i,:))));
 end
 
-base_J = J;
-J = 0;
-
-% ========== try #1 ===========
-J1 = base_J/data_size + reg_importance/(2*data_size)*(
-	sum(sum(Weights1.^2)) + sum(sum(Weights2.^2))
+J += (reg_importance/2)*(
+	sum(sum(Weights1(:,2:end).^2)) + sum(sum(Weights2(:,2:end).^2))
 );
 
+J /= data_size;
 
-% ========= try #2 =========
-acc = 0;
-J2 = base_J;
 
-for i = 1:size(Weights1,1)
-	for j = 1:size(Weights1,2)
-		acc += Weights1(i,j)^2;
-	end
-end
 
-for i = 1:size(Weights2,1)
-	for j = 1:size(Weights2,2)
-		acc += Weights2(i,j)^2;
-	end
-end
 
-J2 += reg_importance/2*acc;
 
-J2 = base_J/data_size;
-
-% ===== choice =====
-J = J1;
 
 % =========================================================================
 
