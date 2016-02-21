@@ -24,6 +24,7 @@ Weights2 = reshape(nn_params((1 + (hidden_layer_size * (input_layer_size + 1))):
 
 % Setup some useful variables
 data_size = size(X, 1);
+num_features = size(X, 2);
          
 % You need to return the following variables correctly 
 J = 0;
@@ -62,6 +63,22 @@ Weights2_grad = zeros(size(Weights2));
 %               and Weights2_grad from Part 2.
 %
 % -------------------------------------------------------------
+
+X = [ ones(data_size,1) , X ];
+
+inputs_l2 = X*transpose(Weights1);
+output_l2 = [ ones(data_size,1), sigmoid(inputs_l2) ];
+inputs_l3 = output_l2*transpose(Weights2);
+output = sigmoid(inputs_l3);
+
+for i = 1:data_size
+	onehot_y = zeros(num_labels,1);
+	onehot_y(y(i)) = 1;
+
+	J += sum(-onehot_y.*log(transpose(output(i,:)))-(1-onehot_y).*log(1-transpose(output(i,:))));
+end
+
+J = J./data_size;
 
 % =========================================================================
 
