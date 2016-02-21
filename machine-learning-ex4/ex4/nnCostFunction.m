@@ -84,12 +84,24 @@ J += (reg_importance/2)*(
 
 J /= data_size;
 
-
-
-
-
-
 % =========================================================================
+
+for i = 1:data_size
+	onehot_y = zeros(num_labels,1);
+	onehot_y(y(i)) = 1;
+
+	deltas_l3 = transpose(output(i,:)) - onehot_y;
+	deltas_l2 = (transpose(Weights2)*deltas_l3)(2:end).*sigmoidGradient(transpose(inputs_l2(i,:)));
+
+	Weights2_grad += deltas_l3*output_l2(i,:);
+	Weights1_grad += deltas_l2*X(i,:);
+end
+
+Weights1_grad += [ zeros(size(Weights1,1),1), reg_importance*Weights1(:,2:end) ];
+Weights2_grad += [ zeros(size(Weights2,1),1), reg_importance*Weights2(:,2:end) ];
+
+Weights1_grad /= data_size;
+Weights2_grad /= data_size;
 
 % Unroll gradients
 grad = [Weights1_grad(:) ; Weights2_grad(:)];
