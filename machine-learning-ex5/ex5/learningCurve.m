@@ -53,6 +53,15 @@ error_val   = zeros(data_size, 1);
 
 % ---------------------- Sample Solution ----------------------
 
+for i = 1:data_size
+	X_subset = X(1:i, :);
+	y_subset = y(1:i);
+
+	weights = trainLinearReg(X_subset, y_subset, reg_importance);
+	[ error_train(i), dummy ] = linearRegCostFunction(X_subset, y_subset, weights, 0);
+	[ error_val(i), dummy ] = linearRegCostFunction(Xval, yval, weights, 0);
+end
+
 % -------------------------------------------------------------
 
 % =========================================================================
