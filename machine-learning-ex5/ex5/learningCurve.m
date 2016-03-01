@@ -1,9 +1,9 @@
 function [error_train, error_val] = ...
-    learningCurve(X, y, Xval, yval, lambda)
+    learningCurve(X, y, Xval, yval, reg_importance)
 %LEARNINGCURVE Generates the train and cross validation set errors needed 
 %to plot a learning curve
 %   [error_train, error_val] = ...
-%       LEARNINGCURVE(X, y, Xval, yval, lambda) returns the train and
+%       LEARNINGCURVE(X, y, Xval, yval, reg_importance) returns the train and
 %       cross validation set errors for a learning curve. In particular, 
 %       it returns two vectors of the same length - error_train and 
 %       error_val. Then, error_train(i) contains the training error for
@@ -15,11 +15,11 @@ function [error_train, error_val] = ...
 %
 
 % Number of training examples
-m = size(X, 1);
+data_size = size(X, 1);
 
 % You need to return these values correctly
-error_train = zeros(m, 1);
-error_val   = zeros(m, 1);
+error_train = zeros(data_size, 1);
+error_val   = zeros(data_size, 1);
 
 % ====================== YOUR CODE HERE ======================
 % Instructions: Fill in this function to return training errors in 
@@ -36,13 +36,13 @@ error_val   = zeros(m, 1);
 %
 % Note: If you are using your cost function (linearRegCostFunction)
 %       to compute the training and cross validation error, you should 
-%       call the function with the lambda argument set to 0. 
-%       Do note that you will still need to use lambda when running
+%       call the function with the reg_importance argument set to 0. 
+%       Do note that you will still need to use reg_importance when running
 %       the training to obtain the theta parameters.
 %
 % Hint: You can loop over the examples with the following:
 %
-%       for i = 1:m
+%       for i = 1:data_size
 %           % Compute train/cross validation errors using training examples 
 %           % X(1:i, :) and y(1:i), storing the result in 
 %           % error_train(i) and error_val(i)
@@ -52,12 +52,6 @@ error_val   = zeros(m, 1);
 %
 
 % ---------------------- Sample Solution ----------------------
-
-
-
-
-
-
 
 % -------------------------------------------------------------
 
