@@ -39,6 +39,12 @@ error_val = zeros(length(reg_importance_vec), 1);
 %
 %
 
+for i = 1:length(reg_importance_vec)
+	weights = trainLinearReg(X, y, reg_importance_vec(i));
+	[ error_train(i), dummy ] = linearRegCostFunction(X, y, weights, 0);
+	[ error_val(i), dummy ] = linearRegCostFunction(Xval, yval, weights, 0);
+end
+
 % =========================================================================
 
 end
