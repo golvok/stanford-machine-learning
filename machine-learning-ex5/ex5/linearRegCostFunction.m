@@ -19,10 +19,10 @@ grad = zeros(size(weights));
 %               You should set J to the cost and grad to the gradient.
 %
 
+J = (1/(2*data_size))*sum((X*weights - y).^2) + reg_importance/(2*data_size)*sum(weights([2:size(weights)]).^2);
 
+grad = transpose((1/data_size)*transpose(X*weights - y)*X) + [ 0; reg_importance/data_size*weights([2:size(weights)]) ];
 
 % =========================================================================
-
-grad = grad(:);
 
 end
