@@ -23,11 +23,38 @@ sigma = 0.3;
 %        mean(double(predictions ~= yval))
 %
 
+% best_prediction_accuracy = 0;
+% best_C = -1;
+% best_sigma = 0;
 
+% empirically,
+best_C =  0.3
+best_sigma =  0.1
 
+% C = 0.01
+% for i = 1:6
+% 	sigma = 0.01
+% 	for j = 1:6
+% 		model= svmTrain(X, y, C, @(x1, x2) gaussianKernel(x1, x2, sigma));
 
+% 		predictions = svmPredict(model, Xval);
 
+% 		accuracy = mean(double(predictions == yval))
 
+% 		if (accuracy > best_prediction_accuracy)
+% 			best_prediction_accuracy = accuracy;
+% 			best_C = C
+% 			best_sigma = sigma
+% 		end
+
+% 		sigma *= 10/3
+% 	end
+
+% 	C *= 10/3
+% end
+
+C = best_C
+sigma = best_sigma
 
 % =========================================================================
 
