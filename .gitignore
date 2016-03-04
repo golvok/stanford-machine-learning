@@ -8,3 +8,4 @@ originals/**
 **/lib/*
 **/%
 **/ex*/ex*data*.mat
+**/ex*/spam*.mat
