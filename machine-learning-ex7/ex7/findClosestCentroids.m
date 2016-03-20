@@ -21,11 +21,19 @@ idx = zeros(size(X,1), 1);
 % Note: You can use a for-loop over the examples to compute this.
 %
 
+for ix = 1:size(X,1)
+	best_dist = norm(X(ix,:) - centroids(1,:));
+	idx(ix) = 1;
 
+	for icentroid = 1:K
+		dist = norm(X(ix,:) - centroids(icentroid,:));
 
-
-
-
+		if (dist < best_dist)
+			best_dist = dist;
+			idx(ix) = icentroid;
+		end
+	end
+end
 
 % =============================================================
 
