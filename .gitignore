@@ -10,3 +10,6 @@ originals/**
 **/ex*/ex*data*.mat
 **/ex*/spam*.mat
 **/ex7/ex7faces.mat
+**/ex8/ex8_movieParams.mat
+**/ex8/ex8_movies.mat
+**/ex8/movie_ids.txt
