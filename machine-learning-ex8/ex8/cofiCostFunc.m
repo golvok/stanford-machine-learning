@@ -42,9 +42,9 @@ Theta_grad = zeros(size(Theta));
 
 selected_difference = (X*transpose(Theta) - Y).*R;
 
-J = 0.5*sum(sum(selected_difference.^2));
-X_grad = selected_difference*Theta;
-Theta_grad = transpose(selected_difference)*X;
+J = 0.5*sum(sum(selected_difference.^2)) + (lambda/2)*(sum(sum(Theta.^2)) + sum(sum(X.^2)));
+X_grad = selected_difference*Theta + lambda*X;
+Theta_grad = transpose(selected_difference)*X + lambda*Theta;
 
 % =============================================================
 
